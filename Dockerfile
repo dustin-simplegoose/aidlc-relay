@@ -23,7 +23,9 @@ ENV NODE_ENV=production
 
 COPY --from=builder /app/packages/relay/dist ./dist
 COPY --from=builder /app/packages/relay/package.json ./
-COPY --from=builder /app/node_modules ./node_modules
+
+# Install production deps from the npm registry (deps are now published, no workspace: refs)
+RUN npm install --omit=dev --ignore-scripts
 
 EXPOSE 8080
 
