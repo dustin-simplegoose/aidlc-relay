@@ -1,0 +1,25 @@
+services:
+  relay:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: "8080"
+      TEAM_API_KEYS: "dev-key"
+      RELAY_LOG_FORMAT: "text"
+      MAX_CONNECTIONS_PER_TEAM: "20"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+
+  # Optional: Caddy for TLS in production-like local testing
+  # caddy:
+  #   image: caddy:2-alpine
+  #   ports:
+  #     - "443:443"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile
+  #   depends_on:
+  #     - relay
