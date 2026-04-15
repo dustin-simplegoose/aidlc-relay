@@ -18,8 +18,8 @@ importers:
   packages/relay:
     dependencies:
       '@aidlc/core':
-        specifier: file:../../../aidlc/packages/core
-        version: file:../aidlc/packages/core
+        specifier: ^0.0.2
+        version: 0.0.2
       ws:
         specifier: ^8.20.0
         version: 8.20.0
@@ -37,8 +37,8 @@ importers:
   packages/relay-client:
     dependencies:
       '@aidlc/core':
-        specifier: file:../../../aidlc/packages/core
-        version: file:../aidlc/packages/core
+        specifier: ^0.0.2
+        version: 0.0.2
       '@aidlc/relay':
         specifier: workspace:*
         version: link:../relay
@@ -58,8 +58,8 @@ importers:
 
 packages:
 
-  '@aidlc/core@file:../aidlc/packages/core':
-    resolution: {directory: ../aidlc/packages/core, type: directory}
+  '@aidlc/core@0.0.2':
+    resolution: {integrity: sha512-XQ5E19FwxEppD71G9lmkHrRykWfVny4G1yMCkUD2U0uinFQmFbg6K5OFw2Uyb0nDqeGnfpmGhUqCgKAM84H6kA==}
 
   '@esbuild/aix-ppc64@0.27.7':
     resolution: {integrity: sha512-EKX3Qwmhz1eMdEJokhALr0YiD0lhQNwDqkPYyPhiSwKrh7/4KRjQc04sZ8db+5DVVnZ1LmbNDI1uAMPEUBnQPg==}
@@ -672,7 +672,7 @@ packages:
 
 snapshots:
 
-  '@aidlc/core@file:../aidlc/packages/core': {}
+  '@aidlc/core@0.0.2': {}
 
   '@esbuild/aix-ppc64@0.27.7':
     optional: true
