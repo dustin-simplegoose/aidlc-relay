@@ -42,6 +42,36 @@ export function createRelayServer(config: ServerConfig) {
   const clientStates = new WeakMap<WebSocket, ClientState>()
 
   const httpServer = createServer((req: IncomingMessage, res: ServerResponse) => {
+    if (req.url === '/' && req.method === 'GET') {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+      res.end(`<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AIDLC Relay</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 560px; margin: 4rem auto; padding: 0 1.5rem; color: #1a1a1a; line-height: 1.6; }
+  h1 { font-weight: 700; margin: 0 0 0.5rem; }
+  .sub { color: #666; margin-bottom: 2rem; }
+  code { background: #f4f4f5; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+  a { color: #0070f3; }
+  .endpoints { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #eee; font-size: 0.9em; color: #555; }
+</style>
+</head>
+<body>
+<h1>AIDLC Relay</h1>
+<p class="sub">WebSocket relay for AI Development Life Cycle agents.</p>
+<p>This is a backend service. Clients connect via <code>wss://relay.simplygoose.com</code> using the <a href="https://www.npmjs.com/package/@aidlc/relay-client"><code>@aidlc/relay-client</code></a> package.</p>
+<p>Learn more: <a href="https://simplygoose.com">simplygoose.com</a></p>
+<div class="endpoints">
+  Endpoints: <a href="/health">/health</a> (public) · <code>/status</code> (auth required)
+</div>
+</body>
+</html>`)
+      return
+    }
+
     if (req.url === '/health' && req.method === 'GET') {
       res.writeHead(200, { 'Content-Type': 'application/json' })
       res.end(JSON.stringify({ status: 'ok', protocolVersion: PROTOCOL_VERSION }))
